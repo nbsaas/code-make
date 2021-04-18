@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class ChainMake {
+public class CodeMake {
 
     private Logger logger = LoggerFactory.getLogger("imake");
 
@@ -75,13 +75,13 @@ public class ChainMake {
         isApi = api;
     }
 
-    public ChainMake(Class<?> dir, Class<?> codeDir) {
+    public CodeMake(Class<?> dir, Class<?> codeDir) {
         super();
         this.dir = dir;
         this.codeDir = codeDir;
     }
 
-    public ChainMake() {
+    public CodeMake() {
         super();
         this.dir = TemplateAceDir.class;
         this.codeDir = TemplateHibernateDir.class;
