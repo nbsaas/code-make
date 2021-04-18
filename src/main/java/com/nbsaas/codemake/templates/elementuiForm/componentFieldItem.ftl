@@ -1,5 +1,10 @@
 <#macro fieldItem item>
  <el-col :span="${item.col!12}">
+      <#if item.type='richText'>
+         <div style="margin-left: 160px;">
+			<div id="ue${item.id!}" name="${item.id!}" type="text/plain"></div>
+		</div>
+      <#else>
      <el-form-item label="${item.title!}" size="mini" prop="${item.id!}">
          <#if item.type='date'>
          <el-date-picker v-model="form.${item.id!}" type="date"   value-format="yyyy-MM-dd"  placeholder="选择日期">
@@ -66,5 +71,7 @@
              </el-input>
          </#if>
      </el-form-item>
+      </#if>
+      
  </el-col>
 </#macro>

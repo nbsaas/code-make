@@ -27,6 +27,11 @@
 </script>
 <script type="text/javascript">
     //更新组件开始
+    <#list bean.fields as item>
+        <#if item.type='richText'>
+            var ue${item.id} ;
+        </#if>
+    </#list>    
     var ${config_entity}UpdateConfig = {};
     ${config_entity}UpdateConfig.template = "#my-${config_entity}-update";
     ${config_entity}UpdateConfig.methods = config.basicMethod();
@@ -48,6 +53,13 @@
         if (this.deforeUpdateData) {
             this.deforeUpdateData();
         }
+        <#list bean.fields as item>
+            <#if item.type='richText'>
+                if (ue${item.id}) {
+                    data.${item.id} = ue${item.id}.getContent();
+                }
+            </#if>
+       </#list>        
         this.postData("<#noparse>${siteurl}</#noparse>tenantRest/${config_entity}/update.htm", data, function (res) {
             if (res.code == 0) {
                 self.$message({
@@ -88,6 +100,15 @@
         this.postData("<#noparse>${siteurl}</#noparse>tenantRest/${config_entity}/view.htm", data, function (res) {
             if (res.code == 0) {
                 self.form = res;
+                <#list bean.fields as item>
+                    <#if item.type='richText'>
+                    ue${item.id} = initEditor("ue${item.id}");;
+                    ue${item.id}.ready(function () {
+                    //设置编辑器的内容
+                        ue${item.id}.setContent(res.note);
+                    });
+                    </#if>
+                </#list>                
             }
         });
     }
@@ -100,6 +121,15 @@
           </#if>
     </#list>
 
+    ${config_entity}UpdateConfig.destroyed = function () {
+            console.log("destroyed add view ");
+            
+             <#list bean.fields as item>
+                <#if item.type='richText'>
+                  UE.getEditor('ue${item.id}').destroy();
+                </#if>
+            </#list>               
+	}
     var ${config_entity}UpdateView = Vue.component('update-view', ${config_entity}UpdateConfig);
     //更新组件结束
 </script>

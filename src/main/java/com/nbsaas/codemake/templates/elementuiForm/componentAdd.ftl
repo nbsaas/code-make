@@ -29,6 +29,11 @@
 	[@${config_entity}AddView /]
 </script>
 <script type="text/javascript">
+        <#list bean.fields as item>
+            <#if item.type='richText'>
+            var ue${item.id} ;
+            </#if>
+        </#list>
 		//添加组件开始
 		var ${config_entity}AddConfig = {};
 		${config_entity}AddConfig.template = "#my-${config_entity}-add";
@@ -52,6 +57,11 @@
 			}
 		};
 		${config_entity}AddConfig.mounted = function () {
+            <#list bean.fields as item>
+                <#if item.type='richText'>
+                 ue${item.id} = initEditor("ue${item.id}");;
+                </#if>
+            </#list>            
 		}
 		${config_entity}AddConfig.computed = {};
 		<#list bean.fields as item>
@@ -80,6 +90,13 @@
 			if (this.deforeAddData) {
 				this.deforeAddData();
 			}
+             <#list bean.fields as item>
+                <#if item.type='richText'>
+                    if (ue${item.id}) {
+                        data.${item.id} = ue${item.id}.getContent();
+                    }
+                </#if>
+            </#list>               
 			this.postData("<#noparse>${siteurl}</#noparse>tenantRest/${config_entity}/create.htm", data, function (res) {
 				if (res.code == 0) {
 					self.$message({
@@ -92,6 +109,16 @@
 				}
 			});
 		}
+
+        ${config_entity}AddConfig.destroyed = function () {
+            console.log("destroyed add view ");
+            
+             <#list bean.fields as item>
+                <#if item.type='richText'>
+                  UE.getEditor('ue${item.id}').destroy();
+                </#if>
+            </#list>               
+	    }
 		var  ${config_entity}AddView = Vue.component('add-view', ${config_entity}AddConfig);
 
 

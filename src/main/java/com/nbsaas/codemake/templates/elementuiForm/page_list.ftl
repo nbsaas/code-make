@@ -94,6 +94,9 @@
 		 [@${item} /]
 		 </#list>
 	</#if>
+	<#if ueConfig?? &&ueConfig>
+	[@ueConfig /]
+	</#if>
 
 	<script type="text/javascript">
 		var config = {};

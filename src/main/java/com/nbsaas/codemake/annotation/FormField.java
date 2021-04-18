@@ -39,7 +39,7 @@ public @interface FormField {
      *
      * @return
      */
-    int col() default 6;
+    int col() default 12;
 
     /**
      * css类名
