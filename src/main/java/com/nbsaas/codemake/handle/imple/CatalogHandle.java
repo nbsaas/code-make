@@ -10,11 +10,8 @@ public class CatalogHandle implements BeanHandle {
         CatalogClass catalogClass = object.getAnnotation(CatalogClass.class);
         if (catalogClass == null) {
             context.put("catalog", false);
-            context.put("catalog", false);
         } else {
             context.put("catalog", true);
-            context.put("catalog", false);
-
         }
     }
 }

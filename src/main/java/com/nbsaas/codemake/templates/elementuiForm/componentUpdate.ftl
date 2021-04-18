@@ -6,7 +6,7 @@
             <el-form ref="ruleForm" :rules="rules" :model="form" label-width="160px" >
                 <el-row :gutter="10">
                     <#list bean.fields as item>
-                        <el-col :span="12">
+                        <el-col :span="${item.col!12}">
                             <el-form-item label="${item.title!}" size="mini" prop="${item.id!}">
                                 <#if item.type='date'>
                                 <el-date-picker v-model="form.${item.id!}" type="date"   value-format="yyyy-MM-dd"  placeholder="选择日期">
