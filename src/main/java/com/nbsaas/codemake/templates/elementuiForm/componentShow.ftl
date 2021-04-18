@@ -100,7 +100,7 @@
         <el-form class="viewForm" label-width="${bean.viewWidth!100}px">
             <#if bean.fields??>
             <#list bean.fields as item>
-            <el-col :span="12">
+            <el-col :span="${item.col!12}">
                 <el-form-item label="${item.title}">
                     <div v-html="viewModel.${item.id!}${item.extName!}">></div>
                 </el-form-item>
