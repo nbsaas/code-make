@@ -10,6 +10,7 @@
 
   <name>CodeMake</name>
   <url>http://www.nbsaas.com</url>
+  <description>这是一个简单的代码生成工具</description>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
